@@ -7,10 +7,13 @@ public class Movingplatforms : MonoBehaviour
 
     Vector3 startPos;
     bool goingRight = true;
+    Rigidbody rb;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         startPos = transform.position;
+        rb = GetComponent<Rigidbody>();
+        
     }
 
     // Update is called once per frame
@@ -23,12 +26,15 @@ public class Movingplatforms : MonoBehaviour
 
         if(transform.position.x >  startPos.x + distance)
             goingRight = false;
-        if(transform.position.x  < startPos.x + distance)
+        if(transform.position.x < startPos.x)
             goingRight = true;
     }
 
     void OnCollisionEnter(Collision Col)
     {
-        if (Col.gameObject.tag == "player")
+        if (Col.gameObject.tag == "Player")
+        {
+            Destroy(Col.gameObject);
+        }
     }
 }
