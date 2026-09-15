@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     [Header("Movement")]
     public float moveSpeed;
 
@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 movedirection;
 
     Rigidbody rb;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -59,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
         MovePlayer();
     }
 
-    // Update is called once per frame
+
     private void MyInput()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");

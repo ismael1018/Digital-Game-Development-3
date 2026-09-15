@@ -4,19 +4,58 @@ public class PlayerMovement2 : MonoBehaviour
 {
 
     public float moveSpeed = 5f;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public float hopHeight = 5f;
+    public float riseSpeed = 5f;
+    private Collider col;
+    private bool isLevitating;
+
     void Start()
     {
-        
+        col = GetComponent<Collider>();
     }
-
-    // Update is called once per frame
     void Update()
     {
-        float moveX = Input.GetAxis("Horizontal");
-        float moveZ = Input.GetAxis("Vertical");
+        float moveX = 0f;
 
-        Vector3 movement = new Vector3(moveX, 0, moveZ) * moveSpeed * Time.deltaTime;
-        transform.Translate(movement, Space.World);
+        if (Input.GetKey(KeyCode.D) ||
+            Input.GetKey(KeyCode.RightArrow))
+        {
+            moveX = 1f;
+        }
+
+        if (Input.GetKey(KeyCode.A) ||
+            Input.GetKey(KeyCode.LeftArrow))
+        {
+            moveX = -1f;
+        }
+
+        Vector3 movement = new Vector3(moveX, 0f, 0f);
+        transform.position += movement * moveSpeed * Time.deltaTime;
+
+        isLevitating =
+            Input.GetKey(KeyCode.W) ||
+            Input.GetKey(KeyCode.UpArrow);
+
+        if (isLevitating)
+        {
+            col.enabled = false;
+        }
+
+        float targetY = isLevitating ? hopHeight : 0f;
+
+        Vector3 position = transform.position;
+
+        position.y = Mathf.MoveTowards(
+            position.y,
+            targetY,
+            riseSpeed * Time.deltaTime
+        );
+
+        transform.position = position;
+
+        if (!isLevitating && Mathf.Abs(position.y) < 0.01f)
+        {
+            col.enabled = true;
+        }
     }
 }
