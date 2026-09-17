@@ -32,3 +32,7 @@ what code concepts do you need to master to create that experience?
 
 how do you move platforms in 3d, being able to use vector X,Y,Z
 
+
+
+
+
