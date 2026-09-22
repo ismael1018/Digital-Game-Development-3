@@ -37,7 +37,8 @@ public class Tile : MonoBehaviour
     {
         if (!isSafe && other.CompareTag("Player"))
         {
-            Destroy(other.gameObject);
+            FindFirstObjectByType<GameManager>().PlayerDied();
+            other.gameObject.SetActive(false);
         }
     }
 }
